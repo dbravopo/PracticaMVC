@@ -1,0 +1,22 @@
+﻿@model List<PracticaMVC.Models.ClienteEntity>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Listar Clintes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>        
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.nombreCliente</td>
+        </tr>
+
+    }
+
+</table>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PracticaMVCModelStoreContainer" CdmEntityContainer="PracticaMVCEntities1">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="PracticaMVCModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesion">
+      <EntityTypeMapping TypeName="PracticaMVCModel.Profesion">
+        <MappingFragment StoreEntitySet="Profesion">
+          <ScalarProperty Name="idProfesion" ColumnName="idProfesion" />
+          <ScalarProperty Name="nombreProfesion" ColumnName="nombreProfesion" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfesionCliente">
+      <EntityTypeMapping TypeName="PracticaMVCModel.ProfesionCliente">
+        <MappingFragment StoreEntitySet="ProfesionCliente">
+          <ScalarProperty Name="idProfesion_Cliente" ColumnName="idProfesion_Cliente" />
+          <ScalarProperty Name="idProfesion" ColumnName="idProfesion" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

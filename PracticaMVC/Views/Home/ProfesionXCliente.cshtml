@@ -1,0 +1,73 @@
+﻿@model List<PracticaMVC.Models.ClienteEntity>
+@{
+    ViewBag.Title = "ProfesionXCliente";
+}
+
+<h2>ProfesionXCliente</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Genero
+        </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.nombreCliente</td>
+            @if (item.genero == "1")
+            {
+                <td>F</td>
+            }
+            @if (item.genero == "0")
+            {
+                <td>M</td>
+            }
+
+
+        </tr>
+
+    }
+
+</table>
+
+<div>
+    <h1>Mujeres:</h1><h2> @ViewBag.TotalMujeres</h2>
+
+</div>
+<div>
+    <h1>Hombres:</h1><h2> @ViewBag.TotalHombres</h2>
+</div>
+
+<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Hombres', @ViewBag.TotalHombres],
+            ['Mujeres', @ViewBag.TotalMujeres]
+           
+        ]);
+
+        var options = {
+            title: 'Porcentaje',
+            is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+    }
+</script>
+
+
+
+

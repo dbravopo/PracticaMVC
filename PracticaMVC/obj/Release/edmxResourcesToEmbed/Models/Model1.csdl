@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PracticaMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="idCliente" />
+    </Key>
+    <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Genero" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="ProfesionCliente" Relationship="Self.FK_ProfesionCliente_Cliente" FromRole="Cliente" ToRole="ProfesionCliente" />
+  </EntityType>
+  <EntityType Name="Profesion">
+    <Key>
+      <PropertyRef Name="idProfesion" />
+    </Key>
+    <Property Name="idProfesion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreProfesion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ProfesionCliente" Relationship="Self.FK_ProfesionCliente_Profesion" FromRole="Profesion" ToRole="ProfesionCliente" />
+  </EntityType>
+  <EntityType Name="ProfesionCliente">
+    <Key>
+      <PropertyRef Name="idProfesion_Cliente" />
+    </Key>
+    <Property Name="idProfesion_Cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idProfesion" Type="Int32" />
+    <Property Name="idCliente" Type="Int32" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK_ProfesionCliente_Cliente" FromRole="ProfesionCliente" ToRole="Cliente" />
+    <NavigationProperty Name="Profesion" Relationship="Self.FK_ProfesionCliente_Profesion" FromRole="ProfesionCliente" ToRole="Profesion" />
+  </EntityType>
+  <Association Name="FK_ProfesionCliente_Cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="ProfesionCliente" Type="Self.ProfesionCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="idCliente" />
+      </Principal>
+      <Dependent Role="ProfesionCliente">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfesionCliente_Profesion">
+    <End Role="Profesion" Type="Self.Profesion" Multiplicity="0..1" />
+    <End Role="ProfesionCliente" Type="Self.ProfesionCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesion">
+        <PropertyRef Name="idProfesion" />
+      </Principal>
+      <Dependent Role="ProfesionCliente">
+        <PropertyRef Name="idProfesion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PracticaMVCEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="Profesion" EntityType="Self.Profesion" />
+    <EntitySet Name="ProfesionCliente" EntityType="Self.ProfesionCliente" />
+    <AssociationSet Name="FK_ProfesionCliente_Cliente" Association="Self.FK_ProfesionCliente_Cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="ProfesionCliente" EntitySet="ProfesionCliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfesionCliente_Profesion" Association="Self.FK_ProfesionCliente_Profesion">
+      <End Role="Profesion" EntitySet="Profesion" />
+      <End Role="ProfesionCliente" EntitySet="ProfesionCliente" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,41 @@
+﻿@model List<PracticaMVC.Models.ProfesionEntity>
+@{
+    ViewBag.Title = "About";
+}
+
+<h2>Listar Profesiones</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Descripción
+        </th>
+        <th>Listar Clientes</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@item.nombreProfesion</td>
+        <td>@item.descripcion</td>
+        
+        <td>
+            @Ajax.ActionLink("Ver clientes", "ProfesionXCliente",
+        new
+        {
+            idProfesion = item.idProfesion
+        },
+        new AjaxOptions()
+        {
+            HttpMethod = "Get",
+            UpdateTargetId = "ProfesionEntity",
+            InsertionMode = InsertionMode.Replace
+        })
+        </td>
+    </tr>
+
+    }
+
+</table>
